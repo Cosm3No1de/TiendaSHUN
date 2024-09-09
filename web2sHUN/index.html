@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Neón</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM4Z1z0g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0" crossorigin="anonymous">
+    <style>
+        /* Estilos CSS para una apariencia neón moderna y atractiva */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #ff1493, #8a2be2, #ffff00, #32cd32, #00ced1);
+            color: #fff;
+        }
+        header {
+            background-color: rgba(34, 34, 34, 0.8);
+            color: #ff1493;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(255, 20, 147, 0.5);
+            border-radius: 0 0 20px 20px;
+        }
+        h1 {
+            font-weight: 700;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(51, 51, 51, 0.8);
+            padding: 10px;
+            border-radius: 0 0 20px 20px;
+        }
+        nav a {
+            color: #ff1493;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        nav a:hover {
+            background-color: #ff1493;
+            color: #111;
+        }
+        .social-links {
+            margin-left: auto;
+        }
+        .social-links a {
+            margin: 0 5px;
+            font-size: 20px;
+            color: #ff1493;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: #fff;
+        }
+        main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .slider {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(255, 20, 147, 0.5);
+            margin-bottom: 20px;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .slide iframe {
+            width: 100%;
+            height: 100%;
+        }
+        h2 {
+            font-weight: 700;
+            font-size: 2em;
+            margin: 20px 0;
+            color: #ff1493;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+        }
+        .product {
+            border: 1px solid #ff1493;
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            background-color: rgba(34, 34, 34, 0.8);
+            box-shadow: 0 2px 10px rgba(255, 20, 147, 0.5);
+            transition: transform 0.3s;
+        }
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(255, 20, 147, 0.7);
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #ff1493;
+            color: #111;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #cc1178;
+        }
+        #cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(34, 34, 34, 0.8);
+            padding: 15px;
+            border: 1px solid #ff1493;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(255, 20, 147, 0.5);
+            width: 250px;
+        }
+        #cart h3 {
+            margin: 0 0 10px 0;
+            color: #ff1493;
+        }
+        #cart-items {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        #cart-items li {
+            padding: 5px 0;
+            border-bottom: 1px solid #ff1493;
+        }
+        #total-price {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        footer {
+            background-color: rgba(34, 34, 34, 0.8);
+            color: #ff1493;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+        }
+        footer a {
+            color: #ff1493;
+            text-decoration: none;
+        }
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .social-buttons a {
+            margin: 0 10px;
+            font-size: 30px;
+            color: #ff1493;
+            transition: color 0.3s;
+        }
+        .social-buttons a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tienda de Neón</h1>
+    </header>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Productos</a>
+        <a href="#">Carrito</a>
+        <a href="#">Contacto</a>
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank">🌐</a>
+            <a href="https://twitter.com" target="_blank">🐦</a>
+            <a href="https://instagram.com" target="_blank">📸</a>
+        </div>
+    </nav>
+    <main>
+        <div class="slider">
+            <div class="slide active">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="slide">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="slide">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+        <h2>Nuestros Productos</h2>
+        <div class="products">
+            <div class="product">
+                <img src="producto1.jpg" alt="Producto 1">
+                <h3>Producto 1</h3>
+                <p>Descripción del producto 1</p>
+                <p>Precio: $10</p>
+                <button onclick="agregarAlCarrito('Producto 1', 10)">Agregar al Carrito</button>
+            </div>
+            <div class="product">
+                <img src="producto2.jpg" alt="Producto 2">
+                <h3>Producto 2</h3>
+                <p>Descripción del producto 2</p>
+                <p>Precio: $15</p>
+                <button onclick="agregarAlCarrito('Producto 2', 15)">Agregar al Carrito</button>
+            </div>
+            <div class="product">
+                <img src="producto3.jpg" alt="Producto 3">
+                <h3>Producto 3</h3>
+                <p>Descripción del producto 3</p>
+                <p>Precio: $20</p>
+                <button onclick="agregarAlCarrito('Producto 3', 20)">Agregar al Carrito</button>
+            </div>
+            <div class="product">
+                <img src="producto4.jpg" alt="Producto 4">
+                <h3>Producto 4</h3>
+                <p>Descripción del producto 4</p>
+                <p>Precio: $12</p>
+                <button onclick="agregarAlCarrito('Producto 4', 12)">Agregar al Carrito</button>
+            </div>
+            <div class="product">
+                <img src="producto5.jpg" alt="Producto 5">
+                <h3>Producto 5</h3>
+                <p>Descripción del producto 5</p>
+                <p>Precio: $18</p>
+                <button onclick="agregarAlCarrito('Producto 5', 18)">Agregar al Carrito</button>
+            </div>
+            <div class="product">
+                <img src="producto6.jpg" alt="Producto 6">
+                <h3>Producto 6</h3>
+                <p>Descripción del producto 6</p>
+                <p>Precio: $22</p>
+                <button onclick="agregarAlCarrito('Producto 6', 22)">Agregar al Carrito</button>
+            </div>
+        </div>
+    </main>
+    <div id="cart">
+        <h3>Carrito</h3>
+        <ul id="cart-items"></ul>
+        <p id="total-price">Total: $0</p>
+    </div>
+    <footer>
+        <h3>Contacto</h3>
+        <p>Email: <a href="mailto:contacto@tienda.com">contacto@tienda.com</a></p>
+        <p>Teléfono: +123 456 7890</p>
+        <h3>Quiénes Somos</h3>
+        <p>Somos una tienda dedicada a ofrecer los mejores productos de neón al mejor precio.</p>
+        <div class="social-buttons">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-square"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://telegram.me/username" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.tiktok.com/@username" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/channel/CHANNEL_ID" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+    </footer>
+    <script>
+        let carrito = [];
+        let total = 0;
+
+        function agregarAlCarrito(nombre, precio) {
+            carrito.push({ nombre: nombre, precio: precio });
+            total += precio;
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+
+            carrito.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.nombre} - $${item.precio}`;
+                cartItems.appendChild(li);
+            });
+
+            document.getElementById('total-price').textContent = `Total: $${total}`;
+        }
+
+        // Código para el slider
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>
